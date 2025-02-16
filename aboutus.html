@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+    <div class="text-center">
+        <h1 class="display-4">About Us</h1>
+        <p class="lead">Whisking up joy, one pastry at a time</p>
+        <hr class="my-4" style="border-top: 2px solid #ff77a9; width: 50%; margin: auto;">
+    </div>
+
+    <!-- Mission Section -->
+    <section class="my-5">
+        <div class="row align-items-center">
+            
+                {% for i in image %}
+                <div class="col-md-6">
+                    <img src="{{i.image.url}}" alt="Anime Characters" class="img-fluid hero-image">
+                </div>
+                {% endfor %}
+            <div class="col-md-6">
+                <h2 class="text-primary">Our Mission</h2>
+                <p>
+                    At Whisk & Willow Bakery, we believe that every baked good should tell a story. 
+                    Our mission is to craft delicious pastries, bread, and cakes that bring people together 
+                    and create moments of pure happiness.
+                </p>
+                <p>
+                    From our kitchen to your table, we pour love and dedication into every batch, 
+                    blending traditional recipes with a sprinkle of creativity.
+                </p>
+            </div>
+            <div class="col-md-6">
+                <h2 class="text-primary">Our Motivation</h2>
+                <p>
+                    Our motivation comes from the smiles of our customers, the joy of seeing families 
+                    gather over a shared treat, and the love for baking that inspires us every day.
+                </p>
+                <p>
+                    We strive to make every visit to Whisk & Willow Bakery a delightful experience, 
+                    creating memories as sweet as our desserts.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="my-5 bg-dark p-4 rounded">
+        <h2 class="text-center text-primary">Our Core Values</h2>
+        <div class="row text-center">
+            <div class="col-md-4 my-3">
+                <i class="bi bi-heart-fill" style="font-size: 2rem; color: #ff77a9;"></i>
+                <h5 class="my-2">Passion</h5>
+                <p>We’re passionate about baking the freshest and most flavorful treats for our community.</p>
+            </div>
+            <div class="col-md-4 my-3">
+                <i class="bi bi-people-fill" style="font-size: 2rem; color: #ff77a9;"></i>
+                <h5 class="my-2">Community</h5>
+                <p>We’re more than a bakery—we’re a gathering place where smiles and memories are shared.</p>
+            </div>
+            <div class="col-md-4 my-3">
+                <i class="bi bi-tree-fill" style="font-size: 2rem; color: #ff77a9;"></i>
+                <h5 class="my-2">Quality</h5>
+                <p>Every ingredient is hand-picked for its freshness, ensuring the best taste in every bite.</p>
+            </div>
+        </div>
+    </section>
+
+ 
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load static %}
+{% block items %}{{ count }}{% endblock %}
+{% block content %}
+
+<div class="container mt-4">
+  <!-- Product Container -->
+  <div class="d-flex flex-column" style="gap: 16px; width: 100%; scroll-behavior: smooth;">
+    {% for key, cat in products.items %}
+      <div class="category-section">
+        <h1>{{ key }}</h1>
+        <div class="d-flex overflow-hidden product-container" style="gap: 16px; overflow-x: auto; scroll-behavior: smooth;">
+          {% for product in cat %}
+            <a href="{% url 'product' product.id %}" style="text-decoration: none;">
+              <div class="card product-card" style="min-width: 250px; max-width: 250px; flex-shrink: 0; transition: transform 0.3s, box-shadow 0.3s;">
+                <img src="{{ product.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}" style="height: 150px; object-fit: cover;">
+                <div class="card-body">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">{{ product.short_description }}</p>
+                  <span class="text-success fw-bold">Rs {{ product.price }}</span>
+                </div>
+              </div>
+            </a>
+          {% empty %}
+            <p>No products available in this category.</p>
+          {% endfor %}
+        </div>
+        <div class="d-flex justify-content-center mt-3">
+          <!-- Use classes instead of IDs -->
+          <button class="btn btn-primary me-2 scroll-prev">❮</button>
+          <button class="btn btn-primary ms-2 scroll-next">❯</button>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<script>
+  // Select all product containers and their buttons
+  document.querySelectorAll('.category-section').forEach((section) => {
+    const container = section.querySelector('.product-container');
+    const prevButton = section.querySelector('.scroll-prev');
+    const nextButton = section.querySelector('.scroll-next');
+    const productWidth = 250; // Width of each product card
+    const gap = 16; // Gap between cards
+    const shiftAmount = (productWidth + gap) * 4; // Scroll by 4 products
+
+    // Add event listeners for scroll buttons
+    prevButton.addEventListener('click', () => {
+      container.scrollBy({
+        left: -shiftAmount,
+        behavior: 'smooth',
+      });
+    });
+
+    nextButton.addEventListener('click', () => {
+      container.scrollBy({
+        left: shiftAmount,
+        behavior: 'smooth',
+      });
+    });
+  });
+</script>
+
+<style>
+  /* Hover effect for cards */
+  .product-card:hover {
+    transform: scale(1.05); /* Slight zoom effect */
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+  }
+
+  /* Ensure the card's content remains responsive */
+  .product-card img {
+    border-radius: 8px;
+  }
+</style>
+
+{% endblock %}

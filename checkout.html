@@ -1,0 +1,155 @@
+{% extends "base.html" %}
+{% load static %}
+{% block items %}{{ count }}{% endblock %}
+{% block content %}
+
+
+    <div class="container">
+        <div class="checkout-container" style="color: black;">
+            <h2 class="mb-4 text-center">Checkout</h2>
+            <form id="checkout-form" method="POST" action="{% url 'checkout' %}">
+                {% csrf_token %}
+
+                <div class="mb-4">
+                    <h4>Billing Information</h4>
+                    <div class="form-group">
+                        <label for="full_name">Full Name</label>
+                        <input type="text" class="form-control" id="full_name" name="full_name" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="address">Shipping Address</label>
+                        <div id="map" style="height: 400px; width: 100%; margin-top: 15px;"></div>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group mt-3">
+                        <label for="phone">Phone Number</label>
+                        <div style="display: flex; align-items: center;">
+                            <span style="padding: 8px 12px; background-color: #f1f1f1; border: 1px solid #ccc; border-right: none; border-radius: 4px 0 0 4px; color: #555;">+977</span>
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="esewa_id"
+                                name="Nepali_number"
+                                maxlength="10"
+                                oninput="validateEsewaID(this)"
+                                placeholder="Enter your 10-digit Nepali number"
+                                required
+                            >
+                    </div>
+                </div>
+
+                </div>
+
+                    
+
+                <div class="mb-4">
+                    <h4>Payment Information</h4>
+                    <div class="form-group mt-3">
+                        <label for="esewa_id">eSewa ID</label>
+                        <div class="input-group">
+                            <!-- eSewa Icon -->
+                            <span class="input-group-text">
+                                <img 
+                                    src="{% static 'images/e.jpg' %}"
+                                    alt="eSewa Logo" 
+                                    style="width: 24px; height: 24px;">
+                            </span>
+                            <!-- Input field -->
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="esewa_id"
+                                name="esewa_id"
+                                maxlength="10"
+                                oninput="validateEsewaID(this)"
+                                placeholder="Enter your 10-digit eSewa number"
+                                required
+                            >
+                        </div>
+                        <small id="esewa_error" class="text-danger" style="display: none;">Please enter a valid 10-digit Nepali number starting with 97 or 98.</small>
+                    </div>
+                    
+                    <div class="form-group mt-3">
+                        <label for="total_amount">Total Amount</label>
+                        <input
+                            type="text"
+                            class="form-control"
+                            id="total_amount"
+                            name="total_amount"
+                            value="Rs. {{ total }}"
+                            readonly
+                            required>
+                    </div>
+                    
+                    
+                    
+                </div>
+
+                <button type="submit" class="checkout-btn">Complete Order</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Include Leaflet.js -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+
+    <script>
+        // Initialize the map with Bhaktapur's default coordinates
+        var map = L.map('map').setView([27.6750, 85.4270], 13); // Bhaktapur, Nepal
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a default marker for Bhaktapur
+        var marker = L.marker([27.6750, 85.4270], { draggable: true }).addTo(map);
+        marker.bindPopup("Drag or click the map to update your location").openPopup();
+
+        // Function to update the address field with the marker's coordinates
+        function updateAddressField(lat, lng) {
+            document.getElementById('address').value = `Latitude: ${lat}, Longitude: ${lng}`;
+        }
+
+        // Update the address field when the marker is dragged
+        marker.on('dragend', function (e) {
+            var position = marker.getLatLng();
+            updateAddressField(position.lat, position.lng);
+        });
+
+        // Allow user to click anywhere on the map to place the marker
+        map.on('click', function (e) {
+            var lat = e.latlng.lat;
+            var lng = e.latlng.lng;
+
+            // Move the marker to the new location
+            marker.setLatLng([lat, lng]);
+
+            // Update the address field
+            updateAddressField(lat, lng);
+
+            // Open the marker's popup
+            marker.bindPopup("Location updated!").openPopup();
+        });
+            function validateEsewaID(input) {
+                const value = input.value;
+                const pattern = /^(97|98)\d{8}$/; // Starts with 97 or 98 and followed by 8 digits
+                const errorElement = document.getElementById("esewa_error");
+        
+                if (pattern.test(value)) {
+                    errorElement.style.display = "none"; // Hide error message if valid
+                    input.setCustomValidity(""); // Clear invalid state
+                } else {
+                    errorElement.style.display = "block"; // Show error message
+                    input.setCustomValidity("Invalid eSewa number"); // Set invalid state
+                }
+            }
+        
+    </script>
+
+
+{% endblock %}

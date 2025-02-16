@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{%load static%}
+{% block items %}{{count}}{% endblock %}
+{% block content %}  
+
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+    {% for car in  carousels %} 
+      <div class="carousel-item active">
+        <img src="{{car.image.url}}" alt="..." style="object-fit: cover; width:100vw; height:70vh;">
+        <div class="carousel-caption">
+          <h1>{{car.title}}</h1>
+          <p>{{car.description}}</p>
+          <a href='{% url "product" car.id  %}' class="btn" style="background-color:rgb(190, 12, 12); color: white; border-radius: 30px;">Shop Now</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+    </div>  
+
+    
+    <div class="container-fluid trending-section">
+        <div class="container">
+          <h2 class="trending-title">Most Popuar</h2>
+          <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-6 g-4">
+            <!-- Trending Card 1 -->
+            {% for car in  Products %}
+            <div class="col">
+              <a href='{% url "product" car.id  %}'>
+              <div class="card trending-card position-relative">
+                <img src="{{car.image.url}}" class="card-img-top trending-image" class="card-img-top" alt="Trending 1">
+                <div class="trending-index">{{car.name}}</div>
+                <div class="card-body text-center">
+                  <h5 class="card-title text-white" style="font-family: 'Times New Roman', Times, serif;">Rs. {{car.price}}</h5>
+                </div>
+              </div>
+            </a>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+   
+    
+
+{% endblock  %}

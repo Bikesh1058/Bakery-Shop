@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{%load static%}
+{% block items %}{{count}}{% endblock %}
+{% block content %} 
+
+<!-- Container for Contact Us Section -->
+<div class="container my-5">
+    <h2 class="text-center text-white mb-4">Contact Us</h2>
+
+    <div class="row">
+        <!-- Form Section -->
+        <div class="col-md-6">
+            <form action="#" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <label for="name" class="form-label text-white">Full Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your Name" required>
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label text-white">Email Address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Your Email" required>
+                </div>
+                <div class="mb-3">
+                    <label for="message" class="form-label text-white">Your Message</label>
+                    <textarea class="form-control" id="message" rows="4" placeholder="Write your message here" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Send Message</button>
+            </form>
+        </div>
+
+        <!-- Interactive Map Section -->
+        <div class="col-md-6">
+            <h4 class="text-white mb-3">Our Location</h4>
+            <!-- Map Container -->
+            <div id="map" style="height: 400px;"></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Leaflet.js and Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css"/>
+
+<script>
+    // Initialize the map with Bhaktapur's coordinates
+    var map = L.map('map').setView([27.6750, 85.4270], 13); // Bhaktapur, Nepal
+
+    // Add OpenStreetMap tile layer
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(map);
+
+    // Add a marker for Whisk & Willow Bakery location in Bhaktapur
+    var bakeryMarker = L.marker([27.6750, 85.4270]).addTo(map);
+    bakeryMarker.bindPopup("<b>Whisk & Willow Bakery</b><br>Visit us in the heart of Bhaktapur!").openPopup();
+
+    // Add a marker for Balkot Chowk
+    var balkotChowkMarker = L.marker([27.6644, 85.4299]).addTo(map); // Balkot Chowk Coordinates
+    balkotChowkMarker.bindPopup("<b>Balkot Chowk</b><br>A well-known area in Bhaktapur.").openPopup();
+</script>
+
+{% endblock %}

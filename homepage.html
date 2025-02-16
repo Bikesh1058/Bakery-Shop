@@ -1,0 +1,225 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🥯 Whisk & Willow 🥯</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            background-color: #1a1a2e; /* Page background color */
+            color: #ffffff; /* Default text color */
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Custom Navbar */
+        .custom-navbar {
+            text-align: center;
+            background-color: #1a1a2e;
+            padding: 15px 0;
+            margin-top: 100px; /* Moved navbar lower by additional 50px */
+        }
+
+        .custom-navbar .nav-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .custom-navbar .nav-links li {
+            display: inline;
+        }
+
+        .custom-navbar .nav-links a {
+            color: #ffffff;
+            font-size: 1rem;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .custom-navbar .nav-links a:hover {
+            color: #ff6b81;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background-color: #2c2c54;
+            border-radius: 50px;
+            padding: 40px;
+            margin-top: 0px; /* Moved hero section lower */
+        }
+
+        .hero-section h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .hero-section p {
+            font-size: 0.9rem;
+            color: #bbbbbb;
+        }
+
+        .btn-custom {
+            background-color: #ff6b81;
+            color: white;
+            font-weight: bold;
+            border: none;
+        }
+
+        .btn-custom:hover {
+            background-color: #ff4757;
+        }
+
+        /* Custom Search Bar Styles */
+        .input-group .form-control {
+            border-radius: 50px 0 0 50px; /* Rounded corners for the input field */
+        }
+
+        .input-group .btn-custom {
+            border-radius: 0 50px 50px 0; /* Rounded corners for the search button */
+        }
+
+        /* Image Styling */
+        .hero-image {
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a1a2e;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        footer p {
+            color: #ffffff;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: #ff6b81;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        .btn-custom {
+            border-radius: 50px;
+          }
+          
+          .custom-footer {
+            background-color: #1a1a2e;
+            color: #ffffff;
+            padding: 20px 0;
+          }
+          .footer-line {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 20px;
+          }
+          .footer-description {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 14px;
+            line-height: 1.6;
+          }
+          .social-icons a {
+            color: #ffffff;
+            font-size: 20px;
+            margin-right: 15px;
+            transition: color 0.3s ease;
+          }
+          .social-icons a:hover {
+            color: #ffd700; /* Hover effect for icons */
+          }
+    </style>
+</head>
+<body>
+
+    <!-- Custom Navbar -->
+    <div class="custom-navbar">
+        <ul class="nav-links">
+            <li><a href="home">Home</a></li>
+            <li><a href="store">Store</a></li>
+            <li><a href="aboutus">About Us</a></li>
+            <li><a href="contactus">Contact Us</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero Section -->
+        <div class="container">
+            <div class="hero-section row align-items-center">
+                <!-- Left Content -->
+                <div class="col-lg-6">
+                    <h1>Bakery Store</h1>
+                    <form class="my-4">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Search culture...">
+                            <button class="btn btn-custom" type="button">Search</button>
+                        </div>
+                    </form>
+                    <p>
+                        Top search: <span>Chocolate cake, Fruit Tarts, Chocolate Chips Muffins, ..</span>
+                    </p>
+                    <a href="home" class="btn btn-custom mt-3 px-4">Shop now ➡</a>
+                </div>
+
+                <!-- Right Content -->
+                <div class="col-lg-6 text-center">
+                 
+                    <img src={% static "\images\b1.jpg" %} alt="Anime Characters" class="img-fluid hero-image">
+                    
+                </div>
+            </div>
+        </div>
+        <div class="container text-center mt-5">
+            <h4 class="fw-bold" style="color: #ffffff; font-size: 1rem;">Share Bakery Store</h4>
+                <p>to your friends!</p>
+        </div>
+        <footer class="custom-footer">
+            <div class="container">
+                <!-- Horizontal Line -->
+                <div class="footer-line"></div>
+          
+                <!-- Description Section -->
+                <div class="footer-description">
+                    <h5>Bakery Store - Freshly Baked, Every Day</h5>
+                    <p>
+                        "Crafting delicious moments, one bite at a time."  
+                        Experience the joy of freshly baked goods made with love and care.  
+                        Let's make your day sweeter and brighter. 🥖🍰✨
+                    </p>
+                </div>
+                
+          
+          <!-- Footer Bottom Section -->
+          <div class="row align-items-center mt-3">
+            <div class="col-md-6 text-center text-md-start">
+                <p class="mb-0">&copy; Bakery Store 2025. All Rights Reserved | <a href="#" class="text-decoration-none">Privacy</a> | <a href="#" class="text-decoration-none">Terms of Service</a></p>
+            </div>
+            <div class="col-md-6 text-center text-md-end">
+                <!-- Social Icons -->
+                <div class="social-icons">
+                    <a href="#" class="bi bi-facebook"></a>
+                    <a href="#" class="bi bi-twitter"></a>
+                    <a href="#" class="bi bi-instagram"></a>
+                    <a href="#" class="bi bi-youtube"></a>
+                </div>
+            </div>
+        </div>
+        </div>
+        </footer> 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

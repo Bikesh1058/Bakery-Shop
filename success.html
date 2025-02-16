@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<body>
+    <div class="container text-center" style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+        <div>
+            <!-- Tick animation -->
+            <div class="checkmark-circle">
+                <div class="circle"></div>
+                <div class="checkmark"></div>
+            </div>
+            <h2 class="mt-4">Transaction Successful!</h2>
+            <p>Your order has been placed successfully.</p>
+        </div>
+    </div>
+
+    <style>
+        /* Styling for the tick animation */
+        .checkmark-circle {
+            width: 120px;
+            height: 120px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .circle {
+            width: 120px;
+            height: 120px;
+            background: #4caf50;
+            border-radius: 50%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: circle-animation 2s linear infinite;
+        }
+
+        .checkmark {
+            position: absolute;
+            width: 30px;
+            height: 60px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(45deg);
+            border-right: 6px solid #fff;
+            border-bottom: 6px solid #fff;
+            animation: checkmark-animation 2s linear infinite;
+        }
+
+        @keyframes circle-animation {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(0.9);
+                opacity: 0.8;
+            }
+        }
+
+        @keyframes checkmark-animation {
+            0%, 50% {
+                width: 0;
+                height: 0;
+            }
+            70%, 100% {
+                width: 30px;
+                height: 60px;
+            }
+        }
+    </style>
+
+    <script>
+        // Redirect back to store.html after 4 seconds
+        setTimeout(function () {
+            window.location.href = "{% url 'store' %}";
+        }, 4000);
+    </script>
+</body>
+{% endblock %}
